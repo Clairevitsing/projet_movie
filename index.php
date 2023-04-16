@@ -6,10 +6,10 @@ require_once __DIR__. '/bdd/pdo.php';
 require_once __DIR__ .'/layout/header.php';
 require_once __DIR__ .'/layout/navbar.php';
 ?>
-
-<!-- <div class="welcome">
+ 
+<div class="welcome">
     <p>Hello <?php echo $_GET['username']?> </p> 
-</div> -->
+</div> 
 
 <div class=mainpage>
     <h1>Welcome to the multilingual movie site</h1>

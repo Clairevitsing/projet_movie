@@ -17,7 +17,7 @@ require_once 'layout/navbar.php';
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                <form method="post" action="signup_process.php" enctype="multipart/form-data">
+                <form method="post" action="signup_processOld.php" enctype="multipart/form-data">
                     
                 <!-- //hidden pour cacher le form -->
                      

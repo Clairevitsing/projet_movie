@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/bdd/pdo.php';
-require_once __DIR__ . '/layout/header.php';
-require_once __DIR__ . '/layout/navbar.php';
-require_once __DIR__. '/functions/functions.php';
-require_once __DIR__. '/src/classes/registerError.php';
+require_once 'bdd/pdo.php';
+require_once 'layout/header.php';
+require_once 'layout/navbar.php';
+require_once 'functions.php';
+require_once 'src/classes/registerError.php';
 
 
 
@@ -22,7 +22,7 @@ if (isset($_POST['register']) && isset($_FILES['user_photo'])&& $_FILES['user_ph
     } else {
       $img_extension = pathinfo($img_name, PATHINFO_EXTENSION);
       $img_extension_lc = strtolower($img_extension);
-      $allowed_extension = array('png', 'jpg', 'jpeg', 'webp');
+      $allowed_extension = array('png', 'jpg', 'jpeg', 'webp','jfif');
 
       if (in_array($img_extension_lc, $allowed_extension)) {
         $user_photo = uniqid("IMG-") . '.' . $img_extension_lc;
@@ -52,7 +52,7 @@ if (isset($_POST['register']) && isset($_FILES['user_photo'])&& $_FILES['user_ph
             //how to insert the photos
             if ($insert) {
               echo "Hello ".$_POST['userName']."welcome to our site"; 
-              redirect('signup.php?error=' .$_POST['userName']);
+              redirect('index.php?name=' .$_POST['userName']);                 //這裏無法顯示
             } else {
               redirect('signup.php?error=' .registerError::UNABLE_REGISTER);
             }
