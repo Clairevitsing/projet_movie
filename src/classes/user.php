@@ -1,38 +1,38 @@
 <?php
-namespace App;
+namespace App\User;
 
-class user
+use App\User\Exception\UserLoginException;
+use PDO;
+
+class User
 {
-    private string $username;
-    private string $email;
-    private string $pwd;
-    private string $photo;
 
+    public function __construct(
+        PDO $pdo,
+        private string $email, 
+        private string $pwd
+        ){
+            $query="SELECT * FROM users WHERE email = :email";
+            $stmt = $pdo->prepare($query);
+             $stmt->execute(['email'=>$email]);
+            $passDatabase = $stmt ->fetch();
 
-    public function __construct(string $username, ?string $email, string $pwd, string $photo)
-    {
-        $this->username = $username;
-        $this->email = $email;
-        $this->pwd = $pwd;
-        $this->photo = $photo;
-    }
+            if ($passDatabase===false) {
+                throw new UserLoginException("this mail is not registered");
+             }
+          
+             $hashedPassword = $passDatabase['pwd'];
+             if(password_verify($pwd,$hashedPassword)===false){
+                throw new UserLoginException("this password is not correct");
+             }
+        }
 
-    public function getUsername(): string
-    {
-        return $this->username;
+        public function getEmail():string
+        {
+            return $this->email;
+        }
+        public function getPwd():string
+        {
+            return $this->pwd;
+        }
     }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function getPwd(): string
-    {
-        return $this->pwd;
-    }
-    public function getPhoto(): string
-    {
-        return $this->photo;
-    }
-}

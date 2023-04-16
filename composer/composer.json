@@ -12,12 +12,12 @@
             "App\\":"classes/"
         }
     },
-    // "scripts": {
-    //     "start":"php -S localhost:8000"
-    // },
-    // "config":{
-    //     "process-timeout":0
-    // },
+    "scripts": {
+        "start":"php -S localhost:8000"
+    },
+    "config":{
+        "process-timeout":0
+    },
     "require": {
         "symfony/dotenv": "^6.2",
         "symfony/mailer": "^6.2"

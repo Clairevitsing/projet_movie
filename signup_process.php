@@ -1,4 +1,6 @@
 <?php
+session_start();
+require_once 'vendor/autoload.php';
 require_once 'bdd/pdo.php';
 require_once 'layout/header.php';
 require_once 'layout/navbar.php';
@@ -19,12 +21,13 @@ try{
   $crud = new UserCrud($pdo);
   $crud->create($newUser);
 }catch(UserRegisterException $e){
-  echo "register error: ".$e->getMessage();
+ $_SESSION['flash_msg'] = $e->getMessage();
+ Utils ::redirect("signup.php");
+  // echo "register error: ".$e->getMessage();
 }catch(PDOException $e){
-  echo "error while creating user: ".$e->getMessage()."/". 
-  $e->getMessage();
-}finally{
-  exit;
+  $_SESSION['flash_msg'] = $e->getCode(). "/" . $e->getMessage();
+  // echo "error while creating user: ".$e->getMessage()."/". 
+  Utils ::redirect("signup.php");
 }
 
 // $query = "INSERT INTO users VALUES (null, :username, :email, :pwd, :photo)";

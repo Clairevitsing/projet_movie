@@ -17,11 +17,17 @@ require_once 'layout/navbar.php';
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                <form method="post" action="signup_processOld.php" enctype="multipart/form-data">
-                    
-                <!-- //hidden pour cacher le form -->
-                     
+              <?php if(isset($_SESSION['flash_msg'])){?>
+                <div class="alert alert-danger">
+                <?php echo $_SESSION['flash_msg'];?>
+                </div> 
+                <?php 
+                unset($_SESSION['flash_msg']);
+              }?>
+                           
 
+                <form method="post" action="signup_processOld.php" enctype="multipart/form-data">
+          
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example1cg">Your Name</label>
                         <input type="text" id="form3Example1cg" class="form-control form-control-lg"  name="username" placeholder="Username" required />
